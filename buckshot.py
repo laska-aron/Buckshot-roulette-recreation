@@ -60,16 +60,35 @@ while run == True:
                         pass
 
                 print(', '.join(map(str, itemstext)))
+                random.shuffle(itemstext)
                 time.sleep(3)
-                tevés = True
-                while tevés == True:
+                dealerisnext = False
+                while dealerisnext == False:
                     print("Mit szertnél tenni?")
                     print("[1] Az ellenfél / osztó lelövése")
                     print("[2] Önmagad lelövése")
                     print("[3] Tárgy(ak) használata")
                     valaszt2 = input(">>>")
                     if valaszt2 == "1":
-                        print("OK")
+                        if roundstext[0] == "Éles":
+                            dealerhp -= 1
+                            print("Egy éles tölténnyel lelőtted az osztót/ellenfelet!")
+                            print("Az élete csökkent egy ponttal.")
+                            print(f"Az osztó maradék élete: {dealerhp}")
+                            if dealeriscuffed == False:
+                                if len(roundstext) > 0 and dealerhp > 0:
+                                    print("Most az osztó/ellenfél következik.")
+                                    dealerisnext = True
+                                
+                            else:
+                                print("Mivel megbilincselted az osztót/ellenfelet, kimarad a következő körből és ismét te következel.")
+
+                        else:
+                            print("Megpróbáltad lelőni az osztót/ellenfelet, de vak töltény volt.")
+                            if dealeriscuffed == False:
+                                if len(roundstext) > 0:
+                                    print("Most az osztó/ellenfél következik.")
+                                    dealerisnext = True
 
                     elif valaszt2 == "2":
                         print("OK2")
@@ -86,7 +105,7 @@ while run == True:
                                 itemfound = True
                                 print(valaszt3)
                                 if valaszt3.lower() == "cigi":
-                                    if playerhp == 4 and (valaszt3 == "Cigi" or "cigi"):
+                                    if playerhp == 4 and (valaszt3.lower() == "cigi"):
                                         print("Max életen vagy, nem használhatsz cigit!")
                                         
                                     else:
@@ -124,31 +143,19 @@ while run == True:
                                         print('Az osztó / ellenfél már meg van bilincselve!')
 
                                 elif valaszt3.lower() == "sör":
-                                    if thereareroundsleft == True:
-                                        sörsors = random.choice(roundstext)
-                                        print(sörsors)
-                                        print(roundstext)
-                                        sörroundfound = False
-                                        for roundssör in roundstext:
-                                            if (sörsors == roundssör) and sörroundfound == False:
-                                                roundstext.remove(roundssör)
-                                                sörroundfound = True
-
-                                            else:
-                                                pass
-
-                                        print(f"Egy {sörsors} töltény kiszedve!")
+                                        print(f"Egy {roundstext[0]} töltény kiszedve!")
                                         print("Egy sör elhasználva!")
                                         itemstext.remove(elem)
                                         print("A megmardt tárgyak:", end=" ")
                                         print(', '.join(map(str, itemstext)))
-                                        print(roundstext)
 
-                                    else:
-                                        pass
-                                    
                                 elif valaszt3.lower() == "nagyító":
-                                    pass
+                                    print("Egy nagyító elhasználva!")
+                                    print(f"A soron következő töltény egy {roundstext[0]} töltény.")
+                                    itemstext.remove(elem)
+                                    print("A megmardt tárgyak:", end=" ")
+                                    print(', '.join(map(str, itemstext)))
+                                    break
 
                                 else:
                                     pass
@@ -163,7 +170,8 @@ while run == True:
 
                         else:
                             pass
-
+                        
+                        
                     else:
                         print("Hibás parancs!")
                         time.sleep(1)
