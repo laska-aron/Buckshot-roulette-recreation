@@ -167,6 +167,8 @@ while run == True:
                         if roundstext[0] == "Vak":
                             print("Megpróbáltad lelőni magad, de vak tötény volt.")
                             roundstext.pop(0)
+                            print("A megmardt tárgyak:", end=" ")
+                            print(', '.join(map(str, itemstext)))
                             shotgunendcut = False
                             dealerisnext = False
                             pass
