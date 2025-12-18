@@ -3,7 +3,7 @@ import time
 
 run = True
 while run == True:
-    print("[1] Játék indítása / Újrapróbálkozás")
+    print("[1] Játék indítása")
     print("[2] Kilépés")
     valaszt1 = input(">>>")
     if valaszt1 == "1":
@@ -103,14 +103,14 @@ while run == True:
                                 if dealerhp == 0:
                                     print("Az osztó/ellenfél meghalt!")
                                     print("Nyertél!")
-                                    break
+                                    quit()
                             else:
                                 dealerhp -= 1
                                 print("Az osztó/ellenfél élete 1 ponttal csökkent.")
                                 if dealerhp == 0:
                                     print("Az osztó/ellenfél meghalt!")
                                     print("Nyertél!")
-                                    break
+                                    quit()
 
                             print(f"Az osztó maradék élete: {dealerhp}")
                             roundstext.pop(0)
@@ -144,7 +144,7 @@ while run == True:
                                 if playerhp == 0:
                                     print("Meghaltál!")
                                     print("Vesztettél!")
-                                    break
+                                    quit()
                                 else: pass
                             else:
                                 playerhp -= 1
@@ -152,7 +152,9 @@ while run == True:
                                 if playerhp == 0:
                                     print("Meghaltál!")
                                     print("Vesztettél!")
-                                    break
+                                    quit()
+
+                                else: pass
 
                             print(f"A megmaradt életed: {playerhp}")
                             roundstext.pop(0)
@@ -161,6 +163,14 @@ while run == True:
                                     print("Most az osztó/ellenfél következik.")
                                     dealerisnext = True
                                     break
+
+                        if roundstext[0] == "Vak":
+                            print("Megpróbáltad lelőni magad, de vak tötény volt.")
+                            roundstext.pop(0)
+                            shotgunendcut = False
+                            dealerisnext = False
+                            pass
+
                                 
 
                     elif valaszt2 == "3":
@@ -208,7 +218,7 @@ while run == True:
                                         print(', '.join(map(str, itemstext)))
                                             
                                     else:
-                                        print('Az osztó / ellenfél már meg van bilincselve!')
+                                        print('Az osztó / ellenfél már meg van bilincselve!') #BUG - MÉR ÍRJA KI HA SIKERES A BLINCSELÉS?!?!
 
                                 elif valaszt3.lower() == "sör":
                                     print("Egy sör elhasználva!")
@@ -294,7 +304,7 @@ while run == True:
                             if playerhp == 0:
                                 print("Meghaltál!")
                                 print("Vesztettél!")
-                                break
+                                quit()
                             else: pass
 
                         else:
@@ -303,7 +313,7 @@ while run == True:
                             if playerhp == 0:
                                 print("Meghaltál!")
                                 print("Vesztettél!")
-                                break
+                                quit()
 
                         print(f"A megmaradt életed: {playerhp}")
                         roundstext.pop(0)
@@ -331,7 +341,7 @@ while run == True:
                         dealerchoice = random.randint(1,2)
                         if dealerchoice == 1:
                             if roundstext[0] == "Éles":
-                                print("Az osztó/ellenfél lelőtt téged egy éles tölténnyel!"); print(shotgunendcut) #BUG: Nem emlékszik, hogy levágta
+                                print("Az osztó/ellenfél lelőtt téged egy éles tölténnyel!"); '''print(shotgunendcut)''' #BUG: Nem emlékszik, hogy levágta, vagy mégis
                                 if shotgunendcut == True:
                                     shotgunendcut = False
                                     playerhp -= 2
@@ -339,7 +349,7 @@ while run == True:
                                     if playerhp == 0:
                                         print("Meghaltál!")
                                         print("Vesztettél!")
-                                        break
+                                        quit()
                                     else: pass
 
                                 else:
@@ -348,7 +358,7 @@ while run == True:
                                     if playerhp == 0:
                                         print("Meghaltál!")
                                         print("Vesztettél!")
-                                        break
+                                        quit()
 
                                 print(f"A megmaradt életed: {playerhp}")
                                 roundstext.pop(0)
@@ -388,14 +398,14 @@ while run == True:
                                     if dealerhp == 0:
                                         print("Az osztó/ellenfél meghalt!")
                                         print("Nyertél!")
-                                        break
+                                        quit()
                                 else:
                                     dealerhp -= 1
                                     print("Az osztó/ellenfél élete 1 ponttal csökkent.")
                                     if dealerhp == 0:
                                         print("Az osztó/ellenfél meghalt!")
                                         print("Nyertél!")
-                                        break
+                                        quit()
 
                                 print(f"Az osztó/ellenfél maradék élete: {dealerhp}")
                                 roundstext.pop(0)
@@ -410,7 +420,7 @@ while run == True:
                                 roundstext.pop(0)
                                 if len(roundstext) > 0:
                                     dealerisnext = True
-                                    break
+                                    pass
                             
     elif valaszt1 == "2":
         print("Leállítás...")
